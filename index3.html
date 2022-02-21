@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>3D Gallery Room</title>
+		<meta name="description" content="Add a description" />
+		<meta name="keywords" content="Add keywords" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico"> 
+		<!--style>
+			/* General Demo Style */
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700|Alegreya+SC:700|Cutive+Mono);
+
+html { height: 100%; }
+
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+body {
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    background: #810606;
+    font-weight: 400;
+    font-size: 15px;
+    color: #333;
+    overflow: hidden;
+    height: 100%;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+.container > h1 {
+	z-index: 9999;
+	font-weight: 400;
+	padding: 50px 20px;
+}
+
+.js .container > h1 {
+	position: fixed;
+	-webkit-backface-visibility: hidden;
+	bottom: 0;
+	left: 0;
+	color: #f0f0f0;
+	padding: 20px;
+	font-size: 20px;
+}
+
+.container > h1 a {
+	font-size: 12px;
+	text-transform: uppercase;
+	display: inline-block;
+	padding: 0 0 0 10px;
+	color: #fff;
+	font-weight: 700;
+}
+
+.container > h1 a:hover,
+.container > h1 a.demo-current {
+	color: #222;
+}
+
+/* Header Style */
+.codrops-top {
+	line-height: 24px;
+	font-size: 11px;
+	text-transform: uppercase;
+	z-index: 9999;
+	background: rgba(255,255,255,0.4);
+}
+
+.js .codrops-top {
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background: transparent;
+}
+
+.codrops-top a {
+	padding: 0px 10px;
+	letter-spacing: 1px;
+	color: #333;
+	color: rgba(0,0,0,0.7);
+	display: inline-block;
+}
+
+.codrops-top a:hover {
+	color: #000;
+}
+
+.codrops-top span.right {
+	float: right;
+}
+
+.codrops-top span.right a {
+	float: left;
+	display: block;
+}
+
+		</style>
+		<style>
+			body {
+	background: #f0f0f0;
+	background: -moz-linear-gradient(top, #f0f0f0 0%, #f0f0f0 85%, #3d3737 85%, #3d3737 100%);
+	background: -webkit-linear-gradient(top, #f0f0f0 0%,#f0f0f0 85%,#3d3737 85%,#3d3737 100%);
+	background: -o-linear-gradient(top, #f0f0f0 0%,#f0f0f0 85%,#3d3737 85%,#3d3737 100%);
+	background: -ms-linear-gradient(top, #f0f0f0 0%,#f0f0f0 85%,#3d3737 85%,#3d3737 100%);
+	background: linear-gradient(to bottom, #f0f0f0 0%,#f0f0f0 85%,#3d3737 85%,#3d3737 100%);
+}
+
+.no-js body {
+	overflow: auto;
+	background: #f0f0f0;
+}
+
+.js .gr-gallery {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.gr-room {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 85%;
+	text-align: center;
+	-webkit-perspective: 1200px;
+	-moz-perspective: 1200px;
+	perspective: 1200px;
+}
+
+.gr-wall-main,
+.gr-wall-other {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	background: #f0f0f0 url(../images/wall.jpg) repeat 0px 0px;
+}
+
+.gr-wall-main {
+	left: 0;
+}
+
+.gr-floor {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	height: 30%;
+	width: 100%;
+	background: url(../images/floor.jpg) repeat 0px 0px;
+}
+
+.gr-gallery figure {
+	position: absolute;
+	-webkit-transform-style: preserve-3d;
+}
+
+.no-js .gr-gallery figure {
+	display: inline-block;
+	position: relative;
+	margin: 20px;
+}
+
+.gr-gallery figure::before {
+	content: '';
+	position: absolute;
+	width: 180%;
+	height: 150%;
+	top: -45%;
+	left: -40%;
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,0.7) 23%, rgba(255,255,255,0) 66%);
+	background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,0.7) 23%, rgba(255,255,255,0) 66%);
+	background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,0.7) 23%, rgba(255,255,255,0) 66%);
+	background: radial-gradient(center, ellipse cover, rgba(255,255,255,0.7) 23%, rgba(255,255,255,0) 66%);
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.gr-gallery figure div,
+.gr-gallery figure img,
+.gr-gallery figcaption {
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+.gr-gallery figure div {
+	position: relative;
+	border: 10px solid #000;
+	box-shadow: 0 10px 7px -5px rgba(0,0,0,0.3);
+}
+
+.gr-gallery figure img {
+	display: block;
+	margin: 0 auto;
+	border: 20px solid #fff;
+}
+
+.gr-gallery figcaption {
+	width: 80px;
+	display: block;
+	font-size: 5px;
+	background: #fff;
+	color: #444;
+	padding: 5px;
+	margin-top: 20px;
+	position: relative;
+	text-align: left;
+	cursor: -webkit-zoom-in; 
+	cursor: -moz-zoom-in;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.gr-gallery figcaption h2 span {
+	display: inline-block;
+	margin: 0 2px;
+}
+
+.gr-gallery figcaption div {
+	display: none;
+}
+
+.gr-gallery nav {
+	position: absolute;
+	width: 300px;
+	height: 38px;
+	bottom: 6%;
+	left: 50%;
+	margin-left: -150px;
+	z-index: 0;
+	cursor: pointer;
+}
+
+.gr-gallery nav span {
+	width: 90px;
+	height: 100%;
+	background: url(../images/steps.png);
+	float: left;
+	text-indent: -100%;
+	overflow: hidden;
+	opacity: 0.6;
+}
+
+.gr-gallery nav span:hover {
+	opacity: 1;
+}
+
+.gr-gallery nav span.gr-next {
+	background-position: top right;
+	float: right;
+}
+
+.gr-caption {
+	position: absolute;
+	width: 400px;
+	height: 280px;
+	padding: 40px;
+	left: 50%;
+	margin-left: -200px;
+	bottom: 0;
+	background: #fff;
+	box-shadow: 0 -1px 3px rgba(0,0,0,0.3);
+	-webkit-transform: translateY(310px);
+	-webkit-transition: -webkit-transform .5s ease;
+	-moz-transform: translateY(310px);
+	-moz-transition: -moz-transform .5s ease;
+	-o-transform: translateY(310px);
+	-o-transition: -o-transform .5s ease;
+	-ms-transform: translateY(310px);
+	-ms-transition: -ms-transform .5s ease;
+	transform: translateY(310px);
+	transition: transform .5s ease;
+}
+
+.gr-caption-close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: #fff;
+	color: #999;
+	width: 20px;
+	height: 20px;
+	font-weight: 400;
+	text-align: center;
+	cursor: pointer;
+	line-height: 16px;
+	font-size: 14px;
+	box-shadow: 0 0 6px -1px rgba(0,0,0,0.3);
+	-webkit-transition: all .2s linear;
+	-moz-transition: all .2s linear;
+	-o-transition: all .2s linear;
+	-ms-transition: all .2s linear;
+	transition: all .2s linear;
+}
+
+.gr-caption-close:hover {
+	color: #555;
+	box-shadow: 0 0 8px -1px rgba(0,0,0,0.6);
+}
+
+.gr-caption h2 {
+	border-bottom: 1px solid rgba(0,0,0,0.3);
+	padding: 0 0 10px 0;
+	margin: 0 0 20px 0;
+	font-family: 'Cutive Mono', cursive;
+}
+
+.gr-caption > div {
+	overflow: hidden;
+	overflow-y: auto;
+	max-height: 160px;
+}
+
+.gr-caption > div a {
+	font-weight: 700;
+}
+
+.gr-caption > div a:hover {
+	color: #d80066;
+}
+		</style-->
+		<script>
+			/* Modernizr 2.6.2 (Custom Build) | MIT & BSD
+ * Build: http://modernizr.com/download/#-csstransforms3d-csstransitions-touch-shiv-cssclasses-prefixed-teststyles-testprop-testallprops-prefixes-domprefixes-load
+ */
+;window.Modernizr=function(a,b,c){function z(a){j.cssText=a}function A(a,b){return z(m.join(a+";")+(b||""))}function B(a,b){return typeof a===b}function C(a,b){return!!~(""+a).indexOf(b)}function D(a,b){for(var d in a){var e=a[d];if(!C(e,"-")&&j[e]!==c)return b=="pfx"?e:!0}return!1}function E(a,b,d){for(var e in a){var f=b[a[e]];if(f!==c)return d===!1?a[e]:B(f,"function")?f.bind(d||b):f}return!1}function F(a,b,c){var d=a.charAt(0).toUpperCase()+a.slice(1),e=(a+" "+o.join(d+" ")+d).split(" ");return B(b,"string")||B(b,"undefined")?D(e,b):(e=(a+" "+p.join(d+" ")+d).split(" "),E(e,b,c))}var d="2.6.2",e={},f=!0,g=b.documentElement,h="modernizr",i=b.createElement(h),j=i.style,k,l={}.toString,m=" -webkit- -moz- -o- -ms- ".split(" "),n="Webkit Moz O ms",o=n.split(" "),p=n.toLowerCase().split(" "),q={},r={},s={},t=[],u=t.slice,v,w=function(a,c,d,e){var f,i,j,k,l=b.createElement("div"),m=b.body,n=m||b.createElement("body");if(parseInt(d,10))while(d--)j=b.createElement("div"),j.id=e?e[d]:h+(d+1),l.appendChild(j);return f=["&#173;",'<style id="s',h,'">',a,"</style>"].join(""),l.id=h,(m?l:n).innerHTML+=f,n.appendChild(l),m||(n.style.background="",n.style.overflow="hidden",k=g.style.overflow,g.style.overflow="hidden",g.appendChild(n)),i=c(l,a),m?l.parentNode.removeChild(l):(n.parentNode.removeChild(n),g.style.overflow=k),!!i},x={}.hasOwnProperty,y;!B(x,"undefined")&&!B(x.call,"undefined")?y=function(a,b){return x.call(a,b)}:y=function(a,b){return b in a&&B(a.constructor.prototype[b],"undefined")},Function.prototype.bind||(Function.prototype.bind=function(b){var c=this;if(typeof c!="function")throw new TypeError;var d=u.call(arguments,1),e=function(){if(this instanceof e){var a=function(){};a.prototype=c.prototype;var f=new a,g=c.apply(f,d.concat(u.call(arguments)));return Object(g)===g?g:f}return c.apply(b,d.concat(u.call(arguments)))};return e}),q.touch=function(){var c;return"ontouchstart"in a||a.DocumentTouch&&b instanceof DocumentTouch?c=!0:w(["@media (",m.join("touch-enabled),("),h,")","{#modernizr{top:9px;position:absolute}}"].join(""),function(a){c=a.offsetTop===9}),c},q.csstransforms3d=function(){var a=!!F("perspective");return a&&"webkitPerspective"in g.style&&w("@media (transform-3d),(-webkit-transform-3d){#modernizr{left:9px;position:absolute;height:3px;}}",function(b,c){a=b.offsetLeft===9&&b.offsetHeight===3}),a},q.csstransitions=function(){return F("transition")};for(var G in q)y(q,G)&&(v=G.toLowerCase(),e[v]=q[G](),t.push((e[v]?"":"no-")+v));return e.addTest=function(a,b){if(typeof a=="object")for(var d in a)y(a,d)&&e.addTest(d,a[d]);else{a=a.toLowerCase();if(e[a]!==c)return e;b=typeof b=="function"?b():b,typeof f!="undefined"&&f&&(g.className+=" "+(b?"":"no-")+a),e[a]=b}return e},z(""),i=k=null,function(a,b){function k(a,b){var c=a.createElement("p"),d=a.getElementsByTagName("head")[0]||a.documentElement;return c.innerHTML="x<style>"+b+"</style>",d.insertBefore(c.lastChild,d.firstChild)}function l(){var a=r.elements;return typeof a=="string"?a.split(" "):a}function m(a){var b=i[a[g]];return b||(b={},h++,a[g]=h,i[h]=b),b}function n(a,c,f){c||(c=b);if(j)return c.createElement(a);f||(f=m(c));var g;return f.cache[a]?g=f.cache[a].cloneNode():e.test(a)?g=(f.cache[a]=f.createElem(a)).cloneNode():g=f.createElem(a),g.canHaveChildren&&!d.test(a)?f.frag.appendChild(g):g}function o(a,c){a||(a=b);if(j)return a.createDocumentFragment();c=c||m(a);var d=c.frag.cloneNode(),e=0,f=l(),g=f.length;for(;e<g;e++)d.createElement(f[e]);return d}function p(a,b){b.cache||(b.cache={},b.createElem=a.createElement,b.createFrag=a.createDocumentFragment,b.frag=b.createFrag()),a.createElement=function(c){return r.shivMethods?n(c,a,b):b.createElem(c)},a.createDocumentFragment=Function("h,f","return function(){var n=f.cloneNode(),c=n.createElement;h.shivMethods&&("+l().join().replace(/\w+/g,function(a){return b.createElem(a),b.frag.createElement(a),'c("'+a+'")'})+");return n}")(r,b.frag)}function q(a){a||(a=b);var c=m(a);return r.shivCSS&&!f&&!c.hasCSS&&(c.hasCSS=!!k(a,"article,aside,figcaption,figure,footer,header,hgroup,nav,section{display:block}mark{background:#FF0;color:#000}")),j||p(a,c),a}var c=a.html5||{},d=/^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i,e=/^(?:a|b|code|div|fieldset|h1|h2|h3|h4|h5|h6|i|label|li|ol|p|q|span|strong|style|table|tbody|td|th|tr|ul)$/i,f,g="_html5shiv",h=0,i={},j;(function(){try{var a=b.createElement("a");a.innerHTML="<xyz></xyz>",f="hidden"in a,j=a.childNodes.length==1||function(){b.createElement("a");var a=b.createDocumentFragment();return typeof a.cloneNode=="undefined"||typeof a.createDocumentFragment=="undefined"||typeof a.createElement=="undefined"}()}catch(c){f=!0,j=!0}})();var r={elements:c.elements||"abbr article aside audio bdi canvas data datalist details figcaption figure footer header hgroup mark meter nav output progress section summary time video",shivCSS:c.shivCSS!==!1,supportsUnknownElements:j,shivMethods:c.shivMethods!==!1,type:"default",shivDocument:q,createElement:n,createDocumentFragment:o};a.html5=r,q(b)}(this,b),e._version=d,e._prefixes=m,e._domPrefixes=p,e._cssomPrefixes=o,e.testProp=function(a){return D([a])},e.testAllProps=F,e.testStyles=w,e.prefixed=function(a,b,c){return b?F(a,b,c):F(a,"pfx")},g.className=g.className.replace(/(^|\s)no-js(\s|$)/,"$1$2")+(f?" js "+t.join(" "):""),e}(this,this.document),function(a,b,c){function d(a){return"[object Function]"==o.call(a)}function e(a){return"string"==typeof a}function f(){}function g(a){return!a||"loaded"==a||"complete"==a||"uninitialized"==a}function h(){var a=p.shift();q=1,a?a.t?m(function(){("c"==a.t?B.injectCss:B.injectJs)(a.s,0,a.a,a.x,a.e,1)},0):(a(),h()):q=0}function i(a,c,d,e,f,i,j){function k(b){if(!o&&g(l.readyState)&&(u.r=o=1,!q&&h(),l.onload=l.onreadystatechange=null,b)){"img"!=a&&m(function(){t.removeChild(l)},50);for(var d in y[c])y[c].hasOwnProperty(d)&&y[c][d].onload()}}var j=j||B.errorTimeout,l=b.createElement(a),o=0,r=0,u={t:d,s:c,e:f,a:i,x:j};1===y[c]&&(r=1,y[c]=[]),"object"==a?l.data=c:(l.src=c,l.type=a),l.width=l.height="0",l.onerror=l.onload=l.onreadystatechange=function(){k.call(this,r)},p.splice(e,0,u),"img"!=a&&(r||2===y[c]?(t.insertBefore(l,s?null:n),m(k,j)):y[c].push(l))}function j(a,b,c,d,f){return q=0,b=b||"j",e(a)?i("c"==b?v:u,a,b,this.i++,c,d,f):(p.splice(this.i++,0,a),1==p.length&&h()),this}function k(){var a=B;return a.loader={load:j,i:0},a}var l=b.documentElement,m=a.setTimeout,n=b.getElementsByTagName("script")[0],o={}.toString,p=[],q=0,r="MozAppearance"in l.style,s=r&&!!b.createRange().compareNode,t=s?l:n.parentNode,l=a.opera&&"[object Opera]"==o.call(a.opera),l=!!b.attachEvent&&!l,u=r?"object":l?"script":"img",v=l?"script":u,w=Array.isArray||function(a){return"[object Array]"==o.call(a)},x=[],y={},z={timeout:function(a,b){return b.length&&(a.timeout=b[0]),a}},A,B;B=function(a){function b(a){var a=a.split("!"),b=x.length,c=a.pop(),d=a.length,c={url:c,origUrl:c,prefixes:a},e,f,g;for(f=0;f<d;f++)g=a[f].split("="),(e=z[g.shift()])&&(c=e(c,g));for(f=0;f<b;f++)c=x[f](c);return c}function g(a,e,f,g,h){var i=b(a),j=i.autoCallback;i.url.split(".").pop().split("?").shift(),i.bypass||(e&&(e=d(e)?e:e[a]||e[g]||e[a.split("/").pop().split("?")[0]]),i.instead?i.instead(a,e,f,g,h):(y[i.url]?i.noexec=!0:y[i.url]=1,f.load(i.url,i.forceCSS||!i.forceJS&&"css"==i.url.split(".").pop().split("?").shift()?"c":c,i.noexec,i.attrs,i.timeout),(d(e)||d(j))&&f.load(function(){k(),e&&e(i.origUrl,h,g),j&&j(i.origUrl,h,g),y[i.url]=2})))}function h(a,b){function c(a,c){if(a){if(e(a))c||(j=function(){var a=[].slice.call(arguments);k.apply(this,a),l()}),g(a,j,b,0,h);else if(Object(a)===a)for(n in m=function(){var b=0,c;for(c in a)a.hasOwnProperty(c)&&b++;return b}(),a)a.hasOwnProperty(n)&&(!c&&!--m&&(d(j)?j=function(){var a=[].slice.call(arguments);k.apply(this,a),l()}:j[n]=function(a){return function(){var b=[].slice.call(arguments);a&&a.apply(this,b),l()}}(k[n])),g(a[n],j,b,n,h))}else!c&&l()}var h=!!a.test,i=a.load||a.both,j=a.callback||f,k=j,l=a.complete||f,m,n;c(h?a.yep:a.nope,!!i),i&&c(i)}var i,j,l=this.yepnope.loader;if(e(a))g(a,0,l,0);else if(w(a))for(i=0;i<a.length;i++)j=a[i],e(j)?g(j,0,l,0):w(j)?B(j):Object(j)===j&&h(j,l);else Object(a)===a&&h(a,l)},B.addPrefix=function(a,b){z[a]=b},B.addFilter=function(a){x.push(a)},B.errorTimeout=1e4,null==b.readyState&&b.addEventListener&&(b.readyState="loading",b.addEventListener("DOMContentLoaded",A=function(){b.removeEventListener("DOMContentLoaded",A,0),b.readyState="complete"},0)),a.yepnope=k(),a.yepnope.executeStack=h,a.yepnope.injectJs=function(a,c,d,e,i,j){var k=b.createElement("script"),l,o,e=e||B.errorTimeout;k.src=a;for(o in d)k.setAttribute(o,d[o]);c=j?h:c||f,k.onreadystatechange=k.onload=function(){!l&&g(k.readyState)&&(l=1,c(),k.onload=k.onreadystatechange=null)},m(function(){l||(l=1,c(1))},e),i?k.onload():n.parentNode.insertBefore(k,n)},a.yepnope.injectCss=function(a,c,d,e,g,i){var e=b.createElement("link"),j,c=i?h:c||f;e.href=a,e.rel="stylesheet",e.type="text/css";for(j in d)e.setAttribute(j,d[j]);g||(n.parentNode.insertBefore(e,n),m(c,0))}}(this,document),Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0))};
+		</script>
+	</head>
+	<body>
+		<div class="container">	
+			<!-- Codrops top bar -->
+			<div class="codrops-top clearfix">
+				<a href="followus.html"><strong>&laquo; Follow Us </strong></a>
+				<span class="right"><a href="aboutus.html">NFT ART GALLERY</a><a href="aboutus.html"><strong>About Us</strong></a></span>
+			</div><!--/ Codrops top bar -->
+
+			<h1>Brave Simba in Suit  <a href="index3.html" class="demo-current">Light</a> <a href="index1.html">Dark</a></h1>
+
+			<div id="gr-gallery" class="gr-gallery">
+				<div class="gr-main">
+					<figure>
+						<div>
+							<img src="images/1.png" alt="img01" />
+						</div>
+						<figcaption>
+							<h2><span>Brave Simba #3</span></h2>
+							<div><p>Brave Simba seats on chair having grey suit with black tie on white shirt, by <a href="aboutus.html">NFT Dynamix</a></p></div>
+						</figcaption>
+					</figure>
+					<figure>
+						<div>
+							<img src="images/2.png" alt="img02" />
+						</div>
+						<figcaption>
+							<h2><span>Brave Simba #4</span></h2>
+							<div><p>Brave Simba peeks out having black tuxedo with black bow tie on white shirt, by <a href="aboutus.html">NFT Dynamix</a></p></div>
+						</figcaption>
+					</figure>
+					<figure>
+						<div>
+							<img src="images/3.png" alt="img03" />
+						</div>
+						<figcaption>
+							<h2><span>Brave Simba #5</span></h2>
+							<div><p>Brave Simba having black tuxedo with black bow tie on white shirt, by <a href="aboutus.html">NFT Dynamix</a></p></div>
+						</figcaption>
+					</figure>
+					<figure>
+						<div>
+							<img src="images/4.png" alt="img04" />
+						</div>
+						<figcaption>
+							<h2><span>Brave Simba #6</span></h2>
+							<div><p>Brave Simba showing thumbs up sign having grey suit with black tie on white shirt, by <a href="aboutus.html">NFT Dynamix</a></p></div>
+						</figcaption>
+					</figure>
+					<figure>
+						<div>
+							<img src="images/5.png" alt="img01" />
+						</div>
+						<figcaption>
+							<h2><span>Brave Simba #7</span></h2>
+							<div><p>Brave Simba looking up having light grey suit with grey tie on white shirt, by <a href="aboutus.html">NFT Dynamix</a></p></div>
+						</figcaption>
+					</figure>
+					<figure>
+						<div>
+							<img src="images/6.png" alt="img02" />
+						</div>
+						<figcaption>
+							<h2><span>Brave Simba #8</span></h2>
+							<div><p>Brave Simba having red tie on white shirt, by <a href="aboutus.html">NFT Dynamix</a></p></div>
+						</figcaption>
+					</figure>
+					<figure>
+						<div>
+							<img src="images/7.png" alt="img03" />
+						</div>
+						<figcaption>
+							<h2><span>Brave Simba #9</span></h2>
+							<div><p>Brave Simba having orange suspenders on white shirt and skin color pant holding black duffle bag, by <a href="aboutus.html">NFT Dynamix</a></p></div>
+						</figcaption>
+					</figure>
+					<figure>
+						<div>
+							<img src="images/8.png" alt="img08" />
+						</div>
+						<figcaption>
+							<h2><span>Brave Simba #10</span></h2>
+							<div><p>Brave Simba having light grey plaid suit with dark grey tie on white shirt and black oxford shoes , holding light grey overcoat, by <a href="aboutus.html">NFT Dynamix</a></p>
+						</figcaption>
+					</figure>
+					<figure>
+						<div>
+							<img src="images/9.png" alt="img09" />
+						</div>
+						<figcaption>
+							<h2><span>Brave Simba #11</span></h2>
+							<div><p>Brave Simba having light grey suit with dark grey tie on light purple shirt ,having wide brim wool felt fedora hat with black aviator sunglass on charcoal overcoat and dark brown leather double monk shoes, by <a href="aboutus.html">NFT Dynamix</a></p></div>
+						</figcaption>
+					</figure>
+					<figure>
+						<div>
+							<img src="images/10.png" alt="img10" />
+						</div>
+						<figcaption>
+							<h2><span>Brave Simba #12</span></h2>
+							<div><p>Brave Simba seats  on chair having light grey suit on light violet shirt with skin color bailey hat , wearing black aviator sunglass on white joey sneakers, by <a href="aboutus.html">NFT Dynamix</a></p></div>
+						</figcaption>
+					</figure>
+				</div>
+			</div>
+		</div><!-- /container -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script>
+			/*
+* debouncedresize: special jQuery event that happens once after a window resize
+*
+* latest version and complete README available on Github:
+* https://github.com/louisremi/jquery-smartresize/blob/master/jquery.debouncedresize.js
+*
+* Copyright 2011 @louis_remi
+* Licensed under the MIT license.
+*/
+var $event = $.event,
+$special,
+resizeTimeout;
+
+$special = $event.special.debouncedresize = {
+	setup: function() {
+		$( this ).on( "resize", $special.handler );
+	},
+	teardown: function() {
+		$( this ).off( "resize", $special.handler );
+	},
+	handler: function( event, execAsap ) {
+		// Save the context
+		var context = this,
+			args = arguments,
+			dispatch = function() {
+				// set correct event type
+				event.type = "debouncedresize";
+				$event.dispatch.apply( context, args );
+			};
+
+		if ( resizeTimeout ) {
+			clearTimeout( resizeTimeout );
+		}
+
+		execAsap ?
+			dispatch() :
+			resizeTimeout = setTimeout( dispatch, $special.threshold );
+	},
+	threshold: 250
+};
+
+// ======================= imagesLoaded Plugin ===============================
+// https://github.com/desandro/imagesloaded
+
+// $('#my-container').imagesLoaded(myFunction)
+// execute a callback when all images have loaded.
+// needed because .load() doesn't work on cached images
+
+// callback function gets image collection as argument
+//  this is the container
+
+// original: MIT license. Paul Irish. 2010.
+// contributors: Oren Solomianik, David DeSandro, Yiannis Chatzikonstantinou
+
+// blank image data-uri bypasses webkit log warning (thx doug jones)
+var BLANK = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+
+$.fn.imagesLoaded = function( callback ) {
+	var $this = this,
+		deferred = $.isFunction($.Deferred) ? $.Deferred() : 0,
+		hasNotify = $.isFunction(deferred.notify),
+		$images = $this.find('img').add( $this.filter('img') ),
+		loaded = [],
+		proper = [],
+		broken = [];
+
+	// Register deferred callbacks
+	if ($.isPlainObject(callback)) {
+		$.each(callback, function (key, value) {
+			if (key === 'callback') {
+				callback = value;
+			} else if (deferred) {
+				deferred[key](value);
+			}
+		});
+	}
+
+	function doneLoading() {
+		var $proper = $(proper),
+			$broken = $(broken);
+
+		if ( deferred ) {
+			if ( broken.length ) {
+				deferred.reject( $images, $proper, $broken );
+			} else {
+				deferred.resolve( $images );
+			}
+		}
+
+		if ( $.isFunction( callback ) ) {
+			callback.call( $this, $images, $proper, $broken );
+		}
+	}
+
+	function imgLoaded( img, isBroken ) {
+		// don't proceed if BLANK image, or image is already loaded
+		if ( img.src === BLANK || $.inArray( img, loaded ) !== -1 ) {
+			return;
+		}
+
+		// store element in loaded images array
+		loaded.push( img );
+
+		// keep track of broken and properly loaded images
+		if ( isBroken ) {
+			broken.push( img );
+		} else {
+			proper.push( img );
+		}
+
+		// cache image and its state for future calls
+		$.data( img, 'imagesLoaded', { isBroken: isBroken, src: img.src } );
+
+		// trigger deferred progress method if present
+		if ( hasNotify ) {
+			deferred.notifyWith( $(img), [ isBroken, $images, $(proper), $(broken) ] );
+		}
+
+		// call doneLoading and clean listeners if all images are loaded
+		if ( $images.length === loaded.length ){
+			setTimeout( doneLoading );
+			$images.unbind( '.imagesLoaded' );
+		}
+	}
+
+	// if no images, trigger immediately
+	if ( !$images.length ) {
+		doneLoading();
+	} else {
+		$images.bind( 'load.imagesLoaded error.imagesLoaded', function( event ){
+			// trigger imgLoaded
+			imgLoaded( event.target, event.type === 'error' );
+		}).each( function( i, el ) {
+			var src = el.src;
+
+			// find out if this image has been already checked for status
+			// if it was, and src has not changed, call imgLoaded on it
+			var cached = $.data( el, 'imagesLoaded' );
+			if ( cached && cached.src === src ) {
+				imgLoaded( el, cached.isBroken );
+				return;
+			}
+
+			// if complete is true and browser supports natural sizes, try
+			// to check for image status manually
+			if ( el.complete && el.naturalWidth !== undefined ) {
+				imgLoaded( el, el.naturalWidth === 0 || el.naturalHeight === 0 );
+				return;
+			}
+
+			// cached images don't fire load sometimes, so we reset src, but only when
+			// dealing with IE, or image is complete (loaded) and failed manual check
+			// webkit hack from http://groups.google.com/group/jquery-dev/browse_thread/thread/eee6ab7b2da50e1f
+			if ( el.readyState || el.complete ) {
+				el.src = BLANK;
+				el.src = src;
+			}
+		});
+	}
+
+	return deferred ? deferred.promise( $this ) : $this;
+};
+
+var Gallery = (function() {
+	
+	var $gallery = $( '#gr-gallery' ),
+		$itemsContainer = $gallery.children( 'div.gr-main' ).hide(),
+		$items = $itemsContainer.find( 'figure' ),
+		$window = $( window ),
+		winsize = getWindowSize(),
+
+		defaults = {
+			speed : 800,
+			easing : 'ease-in-out',
+			margin : 400
+		},
+		// css transitions and 3d transforms support
+		support = { transitions : Modernizr.csstransitions, transforms3d : Modernizr.csstransforms3d },
+		transEndEventNames = {
+			'WebkitTransition' : 'webkitTransitionEnd',
+			'MozTransition' : 'transitionend',
+			'OTransition' : 'oTransitionEnd',
+			'msTransition' : 'MSTransitionEnd',
+			'transition' : 'transitionend'
+		},
+		transformNames = {
+			'WebkitTransform' : '-webkit-transform',
+			'MozTransform' : '-moz-transform',
+			'OTransform' : '-o-transform',
+			'msTransform' : '-ms-transform',
+			'transform' : 'transform'
+		},
+		transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ] + '.cbpFWSlider',
+		transformName = transformNames[ Modernizr.prefixed( 'transform' ) ];
+
+	function init( settings ) {
+
+		Gallery.settings = $.extend( true, {}, defaults, settings );
+		// preload images
+		$itemsContainer.imagesLoaded( buildRoom );
+
+	}
+
+	function buildRoom() {
+		// create room with 4 walls
+		Gallery.room = new Room( $items );
+		// now show first wall (show elements of first wall)
+		Gallery.room.renderWall();
+		initEvents();
+	}
+
+	function Room( $items ) {
+
+		this.$el = $( '<div class="gr-room"><div class="gr-wall-main"><div class="gr-floor"></div></div></div>' ).insertAfter( $itemsContainer );
+		// todo: check the real perspective value for widths > x
+		// the problem here is that if the wall's width (window width) is too large, and the perspective value is too small. 
+		// We will see the background in a certain poitn of time when the wall is rotating (at least in firefox)
+		// we need to adjust the value of the perspective according to the value of the current window's width
+		if( winsize.width > 1300 ) {
+			this.$el.css( 'perspective', 1700 );
+		}
+		this.transitionSettings = transformName + ' ' + Gallery.settings.speed + 'ms ' + Gallery.settings.easing;
+		// element representing the wall
+		this.$mainWall = this.$el.find( 'div.gr-wall-main' ).css( 'transition', this.transitionSettings );
+		// 4 walls (or 1 if no support for 3dtransforms)
+		this.walls = [];
+		// current rendered wall
+		this.currentWall = 0; // 0,1,2,3
+		// current item being shown
+		this.currentItem = 0;
+		// total number of items
+		this.totalItems = $items.length;
+		// is walking
+		this.walking = false;
+		this.caption = -1;
+		this.create();
+
+	}
+
+	Room.prototype = {
+
+		create : function() {
+
+			// check on settings.layout
+			this.layout = typeof Gallery.settings.layout != 'undefined' && Gallery.settings.layout instanceof Array && support.transforms3d ? Gallery.settings.layout : this.getLayoutSettings();
+			
+			var pos = 0, max = 0, prev = 0,
+				wallsCount = support.transforms3d ? 4 : 1;
+
+			for( var i = 0; i < wallsCount; ++i ) {
+
+				var nmb = this.layout[ i ];
+				max = nmb + prev;
+				prev += nmb;
+				var wall = new Wall( $items.slice( pos, max ).clone() );
+				pos = max;
+				this.walls.push( wall );
+
+			}
+
+			// add navigation
+			if( this.totalItems > 1 ) {
+				this.$navPrev = $( '<span class="gr-prev">prev</span>' ).on( 'click', $.proxy( this.navigate, this, 'prev' ) );
+				this.$navNext = $( '<span class="gr-next">next</span>' ).on( 'click', $.proxy( this.navigate, this, 'next' ) );
+				this.$nav = $( '<nav/>' ).append( this.$navPrev, this.$navNext ).appendTo( $gallery );
+			}
+
+			// add caption container
+			this.$caption = $( '<div class="gr-caption"><span class="gr-caption-close">x</span></div>' ).appendTo( $gallery );
+			this.$caption.find( 'span.gr-caption-close' ).on( 'click', $.proxy( this.hideDescription, this ) );
+
+			// click on item's caption
+			var self = this;
+			this.$el.on( 'click', 'figure > figcaption', function() {
+				var $caption = $( this ),
+					$item = $caption.parent(), 
+					idx = $item.index() - 1;
+				
+				if( self.caption === self.currentItem && idx === self.currentItem ) {
+					return false;
+				}
+				else if( idx !== self.currentItem ) {
+					self.jump( idx, function() {
+						self.showDescription( $caption, idx );
+					} );
+				}
+				else {
+					self.showDescription( $caption, idx );
+				}
+				
+			} );
+
+			// click items
+			this.$el.on( 'click', 'figure > div', function() {
+				var $item = $( this ).parent(), idx = $item.index() - 1;
+				if( idx === self.currentItem ) {
+					return false;
+				}
+				self.jump( idx );
+			} );
+
+		},
+		getLayoutSettings : function() {
+
+			var perwall = Math.floor( this.totalItems / 4 ),
+				lastwall = perwall + this.totalItems % 4;
+
+			return support.transforms3d ? [perwall,perwall,perwall,lastwall] : [this.totalItems];
+
+		},
+		// displays the items of a wall on a container $wallElem
+		renderWall : function( $wallElem ) {
+
+			var $wallElem = $wallElem || this.$mainWall,
+				wallH = $wallElem.height(),
+				wallmargins = 150,
+				wall = this.walls[ this.currentWall ],
+				totalLeft = 0, lastItemW = 0,
+				wallMarginLeft = 0, sumWidths = 0;
+
+			for( var i = 0; i < wall.itemsCount; ++i ) {
+
+				var $item = wall.$items.eq( i );
+
+				$item.appendTo( $wallElem );
+
+				var itemH = $item.height(),
+					figcaptionH = $item.find( 'figcaption' ).outerHeight( true );
+
+				if( itemH > wallH - wallmargins ) {
+					$item.find('img').height( wallH - wallmargins - figcaptionH );
+					$item.css( 'top', ( wallmargins / 2 ));
+				}
+				else {
+					$item.css( 'top', ( wallH - itemH ) / 2 );
+				}
+				
+				var itemW = wall.widths[i] || $item.width();
+				
+				sumWidths += itemW;
+
+				if( i === 0 ) {
+					totalLeft = winsize.width / 2 - itemW / 2;
+					wallMarginLeft = Math.ceil(totalLeft);
+				}
+				else {
+					totalLeft += lastItemW + Gallery.settings.margin;
+				}
+
+				lastItemW = itemW;
+
+				$item.css( { left : totalLeft } );
+				wall.widths[i] = itemW;
+
+			};
+
+			// update wall element's width
+			var wallWidth = wallMarginLeft === 0 ? winsize.width : Math.ceil( wallMarginLeft + ( wall.itemsCount - 1 ) * Gallery.settings.margin + sumWidths + winsize.width / 2 - lastItemW / 2 );
+			$wallElem.css( 'width', wallWidth ).find( 'div.gr-floor' ).css( 'width', wallWidth );
+
+		},
+		changeWall : function( dir ) {
+
+			// set origins
+			// change current wall's width to windows width and reorganize items accordingly:
+			this.$mainWall.css( {
+				transition : 'none',
+				transformOrigin : dir === 'next' ? '100% 50%' : '0% 50%',
+				width : winsize.width,
+				transform : 'translateX(0px)',
+				backgroundPosition : this.$mainWall.data( 'translationVal' ) + 'px 0px'
+			} );
+	
+			this.walls[ this.lastWall ].$items.css( 'left','+=' + this.$mainWall.data( 'translationVal' ) );
+
+			// update floor
+			this.$mainWall.find( 'div.gr-floor' ).css( {
+				width : winsize.width,
+				backgroundPosition : this.$mainWall.data( 'translationVal' ) + 'px 0px'
+			} );
+			
+			// set transition again
+			this.$mainWall.css('transition', this.transitionSettings );
+
+			// the incoming wall..
+			this.$auxWall = $( '<div class="gr-wall-other"><div class="gr-floor"></div></div>' ).insertAfter( this.$mainWall );
+			var auxfloor = this.$auxWall.find( 'div.gr-floor' );
+
+			// add next wall's items to $auxWall
+			this.renderWall( this.$auxWall );
+
+			var auxWallWidth = this.$auxWall.width(),
+				auxWallInitialTranslationVal = dir === 'next' ? winsize.width : auxWallWidth * -1 + ( auxWallWidth - winsize.width ) * 1,
+				auxWallInitialAngle = dir === 'next' ? -90 : 90,
+				auxWallTransform = support.transforms3d ?
+					'translate3d(' + auxWallInitialTranslationVal + 'px,0px,0px) rotate3d(0,1,0,' + auxWallInitialAngle + 'deg)' :
+					'translate(' + auxWallInitialTranslationVal + 'px)';
+			
+			this.$auxWall.css( {
+				transform : auxWallTransform,
+				transformOrigin : dir === 'next' ? '0% 50%' : '100% 50%'
+			} );
+
+			// change aux wall's width to windows width and reorganize items accordingly:
+			this.$auxWall.data( 'width', auxWallWidth ).css( 'width', winsize.width );
+			auxfloor.css( 'width', winsize.width );
+
+			if(dir === 'prev') {
+				this.walls[ this.currentWall ].$items.css( 'left', '-=' + ( auxWallWidth - winsize.width ) );
+				var bgpos = ( ( auxWallWidth - winsize.width ) * -1 ) + 'px 0px';
+				this.$auxWall.css( 'background-position', bgpos );
+				auxfloor.css( 'background-position', bgpos );
+			}
+
+			setTimeout( $.proxy( function() {
+				
+				var translationVal = this.$mainWall.data( 'translationVal' ) || 0,
+					mainWallFinalTranslationVal = dir === 'next' ? - winsize.width : (translationVal - winsize.width) * -1,
+					mainWallFinalAngle = dir === 'next' ? 90 : -90,
+					mainWallFinalTransform = support.transforms3d ?
+						'translate3d(' + mainWallFinalTranslationVal + 'px,0px,0px) rotate3d(0,1,0,' + mainWallFinalAngle + 'deg)' :
+						'translate(' + mainWallFinalTranslationVal + 'px)';
+
+					auxWallFinalTranslationVal = dir === 'next' ? 0 : 0,
+					auxWallFinalAngle = 0,
+					auxWallFinalTransform = support.transforms3d ?
+						'translate3d(' + auxWallFinalTranslationVal + 'px,0px,0px) rotate3d(0,1,0,' + auxWallFinalAngle + 'deg)' :
+						'translate(' + auxWallFinalTranslationVal + 'px)';
+
+				this.$mainWall.css( 'transform', mainWallFinalTransform );
+				
+				this.$auxWall.css( {
+					transition : this.transitionSettings,
+					transform : auxWallFinalTransform
+				} ).on( transEndEventName, $.proxy( function() {
+					
+					// set original width
+					this.$auxWall.off( transEndEventName ).css( 'width', this.$auxWall.data( 'width' ) );
+					auxfloor.css( 'width', this.$auxWall.data( 'width' ) );
+
+					if( dir === 'prev' ) {
+						
+						// reset transform value and reorganize items accordingly
+						this.$auxWall.css( {
+							transition : 'none',
+							transform : 'translateX(' + ( ( auxWallWidth - winsize.width ) * -1 ) + 'px)',
+							backgroundPosition : '0px 0px'
+						} );
+
+						var wall = this.walls[ this.currentWall ],
+							$lastItem = wall.$items.eq( wall.itemsCount - 1 );
+						
+						// reorganize items accordingly
+						wall.$items.css( 'left', '+=' + ( auxWallWidth - winsize.width ) );
+						auxfloor.css( 'background-position', '0px 0px' );
+
+						// set transition again
+						this.$auxWall.css( 'transition', this.transitionSettings );
+
+						var translationVal = $lastItem.length > 0 ? - ( $lastItem.position().left + $lastItem.width() / 2 - winsize.width / 2 ) : 0;
+						this.$auxWall.data( 'translationVal', translationVal );
+
+					}
+
+					this.switchWalls();
+					this.walking = false;
+
+				}, this ) );
+
+			}, this ), 25 );
+
+		},
+		switchWalls : function() {
+
+			this.$mainWall.remove();
+			this.$mainWall = this.$auxWall.addClass( 'gr-wall-main' ).removeClass( 'gr-wall-other' );
+
+		},
+		navigate : function( dir ) {
+
+			// if animating return
+			if( this.walking ) {
+				return false;
+			}
+
+			this.walking = true;
+			
+			var wall = this.walls[ this.currentWall ],
+				wallItemsCount = wall.itemsCount,
+				changeWall = false;
+
+			// check on direction and update currentItem and currentWall value
+			if( dir === 'next' ) {
+
+				if( support.transforms3d ) {
+					if( this.currentItem < wallItemsCount - 1 ) {
+						++this.currentItem;
+					}
+					else {
+
+						this.lastWall = this.currentWall;
+						// update current wall
+						this.currentWall < 3 ? ++this.currentWall : this.currentWall = 0;
+						// update wall
+						wall = this.walls[ this.currentWall ];
+						changeWall = true;
+						// reset currentItem
+						this.currentItem = 0;
+
+					}
+				}
+				else if( this.currentItem < wallItemsCount - 1 ) {
+					++this.currentItem;
+				}
+				else {
+					this.walking = false;
+					return false;
+				}
+
+			}
+			else if( dir === 'prev' ) {
+
+				if( support.transforms3d ) {
+					if( this.currentItem > 0 ) {
+						--this.currentItem;
+					}
+					else {
+
+						this.lastWall = this.currentWall;
+						// update current wall
+						this.currentWall > 0 ? --this.currentWall : this.currentWall = 3;			
+						// update wall
+						wall = this.walls[ this.currentWall ];
+						changeWall = true;
+						// reset currentItem
+						this.currentItem = wall.itemsCount - 1;
+
+					}
+				}
+				else if( this.currentItem > 0 ) {
+					--this.currentItem;
+				}
+				else {
+					this.walking = false;
+					return false;
+				}
+
+			}
+
+			if( changeWall ) {
+				changeWall = false;
+				this.changeWall( dir );
+			}
+			else {
+				this.jump();
+			}
+
+		},
+		jump : function( pos, callback ) {
+
+			var jumpnow = $.proxy( function() {
+
+				if( typeof pos !== 'undefined' ) {
+					this.currentItem = pos;
+				}
+
+				var	$item = this.walls[ this.currentWall ].$items.eq( this.currentItem ),
+					translationVal = - ( $item.position().left + $item.width() / 2 - winsize.width / 2 ),
+					transformVal = 'translate3d(' + translationVal + 'px,0px,0px)',
+					afterAnim = function() {
+						this.$mainWall.off( transEndEventName );
+						this.walking = false;
+						if( callback ) {
+							callback.call();
+						}
+					};
+
+				this.$mainWall.data( 'translationVal', translationVal )
+
+				if( support.transitions && support.transforms3d ) {
+					this.$mainWall.css( 'transform', transformVal ).on( transEndEventName, $.proxy( afterAnim, this ) );
+				}
+				else {
+					this.$mainWall.stop().animate( { left : translationVal }, Gallery.settings.speed, $.proxy( afterAnim, this ) );
+				}
+			
+			}, this );
+
+			if( this.caption !== -1 ) {
+				this.hideDescription( jumpnow );
+			}
+			else {
+				jumpnow.call();
+			}
+
+		},
+		destroy : function() {
+			this.$el.remove();
+			this.hideDescription();
+			this.$nav.remove();
+			this.$caption.remove();
+			Gallery.room = null;
+		},
+		showDescription : function( $descriptionEl, idx ) {
+			
+			var showdescfn = $.proxy( function() {
+
+				this.$caption
+					.find( 'div.gr-caption-inner' )
+					.remove()
+					.end()
+					.append( '<div class="gr-caption-inner">' + $descriptionEl.html() + '</div>' )
+					.css( 'transform', 'translateY(0px)' );
+				this.caption = idx;	
+
+			}, this );
+
+			if( this.caption !== -1 ) {
+				this.hideDescription( showdescfn );
+			}
+			else {
+				showdescfn.call();
+			}
+
+		},
+		hideDescription : function( callback ) {
+
+			this.$caption.css( 'transform', 'translateY(310px)' );
+			
+			var hidedescfn = $.proxy( function() {
+				this.$caption.off( transEndEventName );
+				this.caption = -1;
+				if( callback && typeof callback === 'function' ) {
+					callback.call();
+				}
+			}, this );
+
+			if( support.transitions ) {
+				this.$caption.on( transEndEventName, hidedescfn );
+			}
+			else {
+				hidedescfn.call();
+			}
+
+		},
+		removeDescription : function() {
+			this.$caption.children( 'div' ).remove();
+			this.caption = -1;
+		}
+
+	}
+
+	function Wall( $items ) {
+		this.$items = $items;
+		this.itemsCount = this.$items.length;
+		this.widths = [];
+	}
+
+	function initEvents() {		
+		$( window ).off( 'debouncedresize' ).on( 'debouncedresize', function() {
+			winsize = getWindowSize();
+			Gallery.room.destroy();
+			buildRoom();
+		} );
+	}
+
+	function getWindowSize() {
+		return { width : $window.width(), height : $window.height() }
+	}
+
+	return { init : init };
+
+})();
+
+		</script>
+		<script>
+			$(function() {
+
+				Gallery.init( {
+					layout : [3,2,3,2]
+				} );
+
+			});
+		</script>
+	</body>
+</html>
